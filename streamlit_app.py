@@ -2,13 +2,15 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from urllib.parse import quote
+
+# URL 인코딩
+file_url_population = 'https://raw.githubusercontent.com/kyungyunie/bigdata/master/' + quote('자치구 단위 서울 생활인구(내국인).csv')
+file_url_wifi_usage_fixed = 'https://raw.githubusercontent.com/kyungyunie/bigdata/master/' + quote('서울특별시 공공와이파이 AP별 사용량_고정형(20210501_20211013).csv')
 
 # 데이터 불러오기
-file_path_population = 'C:/Users/yky03/OneDrive/바탕 화면/새 폴더/자치구 단위 서울 생활인구(내국인).csv'
-file_path_wifi_usage_fixed = 'C:/Users/yky03/OneDrive/바탕 화면/새 폴더/서울특별시 공공와이파이 AP별 사용량_고정형(20210501_20211013).csv'
-
-df_population = pd.read_csv(file_path_population, encoding='euc-kr')
-df_wifi_usage_fixed = pd.read_csv(file_path_wifi_usage_fixed, encoding='euc-kr')
+df_population = pd.read_csv(file_url_population, encoding='euc-kr')
+df_wifi_usage_fixed = pd.read_csv(file_url_wifi_usage_fixed, encoding='euc-kr')
 
 # 자치구 이름 매핑
 gu_code_name = {
@@ -63,15 +65,3 @@ elif page == "데이터 탐색":
     filtered_data = df_population[df_population['자치구'] == selected_gu]
     st.write(filtered_data)
     st.line_chart(filtered_data.set_index('기준일ID')['총생활인구수'])
-
-# 기본 폰트 적용
-st.markdown(
-    """
-    <style>
-    .css-1d391kg {
-        font-family: 'Arial', sans-serif;
-    }
-    </style>
-    """, unsafe_allow_html=True
-)
-
