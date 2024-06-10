@@ -2,12 +2,6 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from matplotlib import font_manager, rc
-
-# 한글 폰트 설정
-font_path = 'C:/Windows/Fonts/NanumGothic.ttf'  # 나눔고딕 폰트 경로
-font = font_manager.FontProperties(fname=font_path).get_name()
-rc('font', family=font)
 
 # 데이터 불러오기
 file_path_population = 'C:/Users/yky03/OneDrive/바탕 화면/새 폴더/자치구 단위 서울 생활인구(내국인).csv'
@@ -70,13 +64,14 @@ elif page == "데이터 탐색":
     st.write(filtered_data)
     st.line_chart(filtered_data.set_index('기준일ID')['총생활인구수'])
 
-# 한글 폰트 적용된 코드
+# 기본 폰트 적용
 st.markdown(
     """
     <style>
     .css-1d391kg {
-        font-family: 'NanumGothic', sans-serif;
+        font-family: 'Arial', sans-serif;
     }
     </style>
     """, unsafe_allow_html=True
 )
+
